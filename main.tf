@@ -9,7 +9,6 @@ resource "aws_route53_record" "default" {
   records                          = split(",", var.values)
   set_identifier                   = var.set_identifier
   health_check_id                  = var.health_check_id
-  multivalue_answer_routing_policy = var.multivalue_answer_routing_policy
   allow_overwrite                  = var.allow_overwrite
 }
 
@@ -22,7 +21,6 @@ resource "aws_route53_record" "alias" {
   type                             = var.type
   set_identifier                   = var.set_identifier
   health_check_id                  = var.health_check_id
-  multivalue_answer_routing_policy = var.multivalue_answer_routing_policy
   allow_overwrite                  = var.allow_overwrite
   alias {
     name                   = var.alias["name"]
