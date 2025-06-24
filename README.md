@@ -18,34 +18,138 @@ To use this module, you can include it in your Terraform configuration. Here's a
 
 ## Examples
 
-## Example: set-with-alias
+## Example: private-hostedzone
 
 ```hcl
-module "route53-record" {
-  source  = "cypik/route53-record/aws"
-  version = "1.0.0"
-  zone_id = "ZxxxxSSBKXLC1"
-  name    = "www"
-  type    = "A"
-  alias = {
-    name                   = "d130easdflja734js.cloudfront.net"
-    zone_id                = "ZxxxxRFHATA1ER4"
-    evaluate_target_health = false
-  }
+module "route53" {
+  source          = "cypik/route53-record /aws"
+  version         = "1.0.0"
+  name            = "route53"
+  environment     = "test"
+  label_order     = ["environment", "name"]
+  private_hostedzone_enabled = true
+  record_enabled  = true
+
+  domain_name = "cypik.com"
+  vpc_id      = "vpc-xxxxxxxxxxxx" # VPC ID to associate
+
+  records = [
+    {
+      name    = "www"
+      type    = "A"
+      ttl     = 3600
+      records = ["10.0.0.27"]
+    },
+    {
+      name    = "admin"
+      type    = "CNAME"
+      ttl     = 3600
+      records = ["mydomain.com"]
+    },
+  ]
 }
 ```
 
-## Example: simple-set
+## Example: public-hostedzone
 
 ```hcl
-module "route53-record" {
-  source  = "cypik/route53-record/aws"
-  version = "1.0.0"
-  zone_id = "xxxxXJD7SxxSBKXLC1"
-  name    = "www"
-  type    = "A"
-  ttl     = "3600"
-  values  = "10.0.0.27"
+module "route53" {
+  source         = "cypik/route53-record /aws"
+  version        = "1.0.0"
+  name           = "route53"
+  environment    = "test"
+  label_order    = ["environment", "name"]
+  public_hostedzone_enabled = true
+  record_enabled = true
+
+  domain_name = "cypik.com"
+
+  records = [
+    {
+      name = "www"
+      type = "A"
+      alias = {
+        name    = "d130easdflja734js.cloudfront.net" # name/DNS of attached cloudfront.
+        zone_id = "Z2XXXXHXTXXXX4"                   # A valid zone ID of cloudfront you are trying to create alias of.
+      }
+    },
+    {
+      name    = "admin"
+      type    = "CNAME"
+      ttl     = 3600
+      records = ["d130easdflja734js.cloudfront.net"]
+    },
+  ]
+}
+```
+
+## Example: records
+
+```hcl
+module "route53" {
+  source         = "cypik/route53-record /aws"
+  version        = "1.0.0"
+  name           = "route53"
+  environment    = "test"
+  label_order    = ["environment", "name"]
+  public_hostedzone_enabled = false
+  record_enabled = true
+
+  zone_id     = local.zone_id
+  domain_name = "cypik.com"
+
+  records = [
+    {
+      name = ""
+      type = "A"
+      ttl  = 3600
+      records = [
+        "10.10.10.10",
+      ]
+    },
+    {
+      name           = "geo"
+      type           = "CNAME"
+      ttl            = 5
+      records        = ["cypik.com"]
+      set_identifier = "europe"
+      geolocation_routing_policy = {
+        continent = "EU"
+      }
+    },
+    {
+      name = "alias-1"
+      type = "A"
+      alias = {
+        name    = "CHANGEME001" # name of the attached service.
+        zone_id = local.zone_id
+      }
+    },
+    {
+      name           = "weighted-policy-test-2"
+      type           = "A"
+      set_identifier = "test-1"
+      alias = {
+        name    = data.aws_lb.lb_1
+        zone_id = data.aws_lb.lb_1.zone_id
+      }
+      weighted_routing_policy = {
+        weight = 50
+      }
+    },
+    {
+      name           = "weighted"
+      type           = "A"
+      set_identifier = "test-2"
+      alias = {
+        name    = data.aws_lb.lb_2.dns_name
+        zone_id = data.aws_lb.lb_2.zone_id
+      }
+      weighted_routing_policy = {
+        weight = 50
+      }
+    }
+  ]
 }
 ```
 
