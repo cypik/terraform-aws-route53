@@ -27,7 +27,7 @@ module "route53" {
 
   records = [
     {
-      name = ""
+      name = "test"
       type = "A"
       ttl  = 3600
       records = [
