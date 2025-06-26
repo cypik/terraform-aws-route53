@@ -12,6 +12,6 @@ output "tags" {
 }
 
 output "record_names" {
-  value = [for r in aws_route53_record.this : r.fqdn]
+  value       = [for r in aws_route53_record.this : r.fqdn]
   description = "Fully qualified domain names (FQDNs) of the created Route53 records"
 }

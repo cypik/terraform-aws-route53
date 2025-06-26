@@ -22,7 +22,7 @@ To use this module, you can include it in your Terraform configuration. Here's a
 
 ```hcl
 module "route53" {
-  source          = "cypik/route53-record /aws"
+  source          = "cypik/route53-record/aws"
   version         = "1.0.0"
   name            = "route53"
   environment     = "test"
@@ -54,7 +54,7 @@ module "route53" {
 
 ```hcl
 module "route53" {
-  source         = "cypik/route53-record /aws"
+  source         = "cypik/route53-record/aws"
   version        = "1.0.0"
   name           = "route53"
   environment    = "test"
@@ -87,7 +87,7 @@ module "route53" {
 
 ```hcl
 module "route53" {
-  source         = "cypik/route53-record /aws"
+  source         = "cypik/route53-record/aws"
   version        = "1.0.0"
   name           = "route53"
   environment    = "test"
@@ -166,14 +166,14 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.5 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.82.2 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.12.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >=5.82.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.82.2 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >=5.82.2 |
 
 ## Modules
 
@@ -218,7 +218,7 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 
 | Name | Description |
 |------|-------------|
-| <a name="output_record_names"></a> [record\_names](#output\_record\_names) | n/a |
+| <a name="output_record_names"></a> [record\_names](#output\_record\_names) | Fully qualified domain names (FQDNs) of the created Route53 records |
 | <a name="output_tags"></a> [tags](#output\_tags) | A mapping of tags to assign to the resource. |
 | <a name="output_zone_id"></a> [zone\_id](#output\_zone\_id) | The Hosted Zone ID. This can be referenced by zone records. |
 <!-- END_TF_DOCS -->
