@@ -22,7 +22,7 @@ To use this module, you can include it in your Terraform configuration. Here's a
 
 ```hcl
 module "route53" {
-  source          = "cypik/route53-record/aws"
+  source          = "cypik/route53/aws"
   version         = "1.0.0"
   name            = "route53"
   environment     = "test"
@@ -54,7 +54,7 @@ module "route53" {
 
 ```hcl
 module "route53" {
-  source         = "cypik/route53-record/aws"
+  source         = "cypik/route53/aws"
   version        = "1.0.0"
   name           = "route53"
   environment    = "test"
@@ -87,7 +87,7 @@ module "route53" {
 
 ```hcl
 module "route53" {
-  source         = "cypik/route53-record/aws"
+  source         = "cypik/route53/aws"
   version        = "1.0.0"
   name           = "route53"
   environment    = "test"
