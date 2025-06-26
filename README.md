@@ -1,6 +1,6 @@
-# Terraform-aws-route53-record
+# Terraform-aws-route53
 
-# Terraform AWS Cloud-Route53-Record Module
+# Terraform AWS Cloud-Route53 Module
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -12,7 +12,7 @@
 - [Outputs](#outputs)
 
 ## Introduction
-This Terraform module creates an AWS Route53-Record along with additional configuration options.
+This Terraform module creates an AWS Route53 along with additional configuration options.
 ## Usage
 To use this module, you can include it in your Terraform configuration. Here's an example of how to use it:
 
@@ -86,10 +86,10 @@ module "route53" {
 ## Example: records
 
 ```hcl
-module "route53" {
+module "records" {
   source         = "cypik/route53/aws"
   version        = "1.0.0"
-  name           = "route53"
+  name           = "records"
   environment    = "test"
   label_order    = ["environment", "name"]
   public_hostedzone_enabled = false

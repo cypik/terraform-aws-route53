@@ -6,15 +6,12 @@ locals {
   zone_id = "Z0711xxxxxxNM0M4C8IJ" # Route53 Zone ID
 }
 
-data "aws_lb" "lb_1" {
+data "aws_lb" "lb" {
   name = "test-lb"
 }
 
-data "aws_lb" "lb_2" {
-  name = "test-lb-2"
-}
 
-module "route53" {
+module "records" {
   source                    = "../../"
   name                      = "route53"
   environment               = "test"
@@ -45,7 +42,7 @@ module "route53" {
       }
     },
     {
-      name = "alias-1"
+      name = "alias"
       type = "A"
       alias = {
         name    = "CHANGEME001" # name of the attached service.
@@ -53,24 +50,12 @@ module "route53" {
       }
     },
     {
-      name           = "weighted-policy-test-2"
+      name           = "weighted-policy"
       type           = "A"
-      set_identifier = "test-1"
+      set_identifier = "test"
       alias = {
-        name    = data.aws_lb.lb_1
-        zone_id = data.aws_lb.lb_1.zone_id
-      }
-      weighted_routing_policy = {
-        weight = 50
-      }
-    },
-    {
-      name           = "weighted"
-      type           = "A"
-      set_identifier = "test-2"
-      alias = {
-        name    = data.aws_lb.lb_2.dns_name
-        zone_id = data.aws_lb.lb_2.zone_id
+        name    = data.aws_lb.lb
+        zone_id = local.zone_id
       }
       weighted_routing_policy = {
         weight = 50
