@@ -23,7 +23,7 @@ To use this module, you can include it in your Terraform configuration. Here's a
 ```hcl
 module "route53" {
   source          = "cypik/route53/aws"
-  version         = "1.0.0"
+  version         = "1.0.1"
   name            = "route53"
   environment     = "test"
   label_order     = ["environment", "name"]
@@ -55,7 +55,7 @@ module "route53" {
 ```hcl
 module "route53" {
   source         = "cypik/route53/aws"
-  version        = "1.0.0"
+  version        = "1.0.1"
   name           = "route53"
   environment    = "test"
   label_order    = ["environment", "name"]
@@ -88,7 +88,7 @@ module "route53" {
 ```hcl
 module "records" {
   source         = "cypik/route53/aws"
-  version        = "1.0.0"
+  version        = "1.0.1"
   name           = "records"
   environment    = "test"
   label_order    = ["environment", "name"]
@@ -166,14 +166,14 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.12.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >=5.82.2 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.15.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.58.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >=5.82.2 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.58.0 |
 
 ## Modules
 
